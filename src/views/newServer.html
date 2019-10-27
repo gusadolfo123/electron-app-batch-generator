@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link rel="stylesheet" href="../vendors/bootstrap/bootstrap.min.css" />
+		<title>New Server</title>
+	</head>
+	<body>
+		<header></header>
+		<div class="container p-4">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="text-center">Add new server</h3>
+				</div>
+				<div class="card-body">
+					<form class="form">
+						<div class="form-group">
+							<label for="nameServer">Name: </label>
+							<input type="text" class="form-control" id="nameServer" required />
+						</div>
+						<div class="form-group">
+							<label for="ipServer">Ip: </label>
+							<input type="text" class="form-control" id="ipServer" required />
+						</div>
+						<div class="form-group">
+							<button class="btn btn-primary btn-block" id="send">Grabar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			window.$ = window.jQuery = require('../vendors/jquery/jquery.js');
+		</script>
+
+		<script>
+			const { ipcRenderer } = require('electron');
+
+			const $form = document.querySelector('form');
+			$('#send').click(() => {
+				alert('asd');
+			});
+			// events
+			$form.addEventListener('submit', e => {
+				const $inputName = document.querySelector('#nameServer').value;
+				const $inputIp = document.querySelector('#ipServer').value;
+
+				console.log($inputName, $inputIp);
+				e.preventDefault();
+			});
+		</script>
+	</body>
+</html>

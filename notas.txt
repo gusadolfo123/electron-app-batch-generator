@@ -1,0 +1,11 @@
+npm install electron
+npm install bootstrap --save
+npm install jquery --save
+npm install popper.js --save
+npm install bootstrap-treeview
+npm install electron-reload
+npm install tailwindcss
+npm install custom-electron-titlebar
+npm install moment --save 
+
+npx tailwind build ./src/css/base-tailwind.css -o ./src/css/tailwind.css
