@@ -17,7 +17,7 @@ app.on('ready', () => {
 	// se crea una instancia de una ventada como ambito global para luego poderce cerrar en otra funcion
 	//  frame: false quita el menu superior
 	mainWindow = new BrowserWindow({
-		// frame: false,
+		frame: false,
 		// maxWidth: 1400,
 		// maxHeight: 800,
 		minHeight: 800,

@@ -21,7 +21,7 @@ setInterval(() => {
 }, 100);
 
 $(function() {
-	var defaultData = [
+	const defaultData = [
 		{
 			text: 'Presentacion',
 			href: '#parent1',
@@ -37,21 +37,6 @@ $(function() {
 					selectable: false,
 					nodes: [
 						{
-							text: 'Comcel.Repos.BankPoints.CommonComcel.Repos.BankPoints.Common',
-							href: '#parent1',
-							selectable: false,
-						},
-						{
-							text: 'Comcel.Repos.BankPoints.ConsoleApplication',
-							href: '#parent2',
-							selectable: false,
-						},
-						{
-							text: 'Comcel.Repos.BankPoints.ConsoleApplication.pruebaNom',
-							href: '#parent2',
-							selectable: false,
-						},
-						{
 							text: 'Comcel.Repos.BankPoints.Common',
 							href: '#parent1',
 							selectable: false,
@@ -67,40 +52,55 @@ $(function() {
 							selectable: false,
 						},
 						{
-							text: 'Comcel.Repos.BankPoints.Common',
+							text: 'Comcel.Repos.BankPoints.Common1',
 							href: '#parent1',
 							selectable: false,
 						},
 						{
-							text: 'Comcel.Repos.BankPoints.ConsoleApplication',
+							text: 'Comcel.Repos.BankPoints.ConsoleApplication1',
 							href: '#parent2',
 							selectable: false,
 						},
 						{
-							text: 'Comcel.Repos.BankPoints.ConsoleApplication.pruebaNom',
+							text: 'Comcel.Repos.BankPoints.ConsoleApplication.pruebaNom1',
 							href: '#parent2',
 							selectable: false,
 						},
 						{
-							text: 'Comcel.Repos.BankPoints.Common',
+							text: 'Comcel.Repos.BankPoints.Common2',
 							href: '#parent1',
 							selectable: false,
 						},
 						{
-							text: 'Comcel.Repos.BankPoints.ConsoleApplication',
+							text: 'Comcel.Repos.BankPoints.ConsoleApplication2',
 							href: '#parent2',
 							selectable: false,
 						},
 						{
-							text: 'Comcel.Repos.BankPoints.ConsoleApplication.pruebaNom',
+							text: 'Comcel.Repos.BankPoints.ConsoleApplication.pruebaNom2',
+							href: '#parent2',
+							selectable: false,
+						},
+						{
+							text: 'Comcel.Repos.BankPoints.Common3',
+							href: '#parent1',
+							selectable: false,
+						},
+						{
+							text: 'Comcel.Repos.BankPoints.ConsoleApplication3',
+							href: '#parent2',
+							selectable: false,
+						},
+						{
+							text: 'Comcel.Repos.BankPoints.ConsoleApplication.pruebaNom3',
 							href: '#parent2',
 							selectable: false,
 						},
 					],
 				},
 				{
-					text: 'WPOLIQA01',
-					href: '#WPOLIQA01',
+					text: 'WPOLIQA02',
+					href: '#WPOLIQA02',
 					selectable: false,
 					nodes: [
 						{
@@ -119,55 +119,55 @@ $(function() {
 							selectable: false,
 						},
 						{
-							text: 'Comcel.Repos.BankPoints.Common',
+							text: 'Comcel.Repos.BankPoints.Common1',
 							href: '#parent1',
 							selectable: false,
 						},
 						{
-							text: 'Comcel.Repos.BankPoints.ConsoleApplication',
+							text: 'Comcel.Repos.BankPoints.ConsoleApplication1',
 							href: '#parent2',
 							selectable: false,
 						},
 						{
-							text: 'Comcel.Repos.BankPoints.ConsoleApplication.pruebaNom',
+							text: 'Comcel.Repos.BankPoints.ConsoleApplication.pruebaNom1',
 							href: '#parent2',
 							selectable: false,
 						},
 						{
-							text: 'Comcel.Repos.BankPoints.Common',
+							text: 'Comcel.Repos.BankPoints.Common2',
 							href: '#parent1',
 							selectable: false,
 						},
 						{
-							text: 'Comcel.Repos.BankPoints.ConsoleApplication',
+							text: 'Comcel.Repos.BankPoints.ConsoleApplication2',
 							href: '#parent2',
 							selectable: false,
 						},
 						{
-							text: 'Comcel.Repos.BankPoints.ConsoleApplication.pruebaNom',
+							text: 'Comcel.Repos.BankPoints.ConsoleApplication.pruebaNom2',
 							href: '#parent2',
 							selectable: false,
 						},
 						{
-							text: 'Comcel.Repos.BankPoints.Common',
+							text: 'Comcel.Repos.BankPoints.Common3',
 							href: '#parent1',
 							selectable: false,
 						},
 						{
-							text: 'Comcel.Repos.BankPoints.ConsoleApplication',
+							text: 'Comcel.Repos.BankPoints.ConsoleApplication3',
 							href: '#parent2',
 							selectable: false,
 						},
 						{
-							text: 'Comcel.Repos.BankPoints.ConsoleApplication.pruebaNom',
+							text: 'Comcel.Repos.BankPoints.ConsoleApplication.pruebaNom3',
 							href: '#parent2',
 							selectable: false,
 						},
 					],
 				},
 				{
-					text: 'WPOLIQA01',
-					href: '#WPOLIQA01',
+					text: 'WPOLIQA03',
+					href: '#WPOLIQA03',
 					selectable: false,
 					nodes: [
 						{
@@ -236,12 +236,6 @@ $(function() {
 		},
 	];
 
-	$('#chk-select-multi:checkbox').on('change', function() {
-		console.log('multi-select change');
-		$selectableTree = initSelectableTree();
-		selectableNodes = findSelectableNodes();
-	});
-
 	let projectsSelected = [];
 
 	var $checkableTree = $('#treeview-checkable').treeview({
@@ -252,16 +246,39 @@ $(function() {
 			// si el nodo no tiene nodos hijos es una aplicacion por lo que se obtiene el padre que es el servidor
 			if (isNullOrUndefined(node.nodes)) {
 				const parent = $('#treeview-checkable').treeview('getParent', node);
+				let counter = projectsSelected.filter(x => x.nameParent == parent.text).length;
+
+				if (counter >= 1) {
+					$(`#resume #count${parent.text}`).html(counter + 1);
+				} else {
+					let resumeDescription = `<div class="col-md-3 justify-content-between" id="${parent.text}">
+												<small class="text-muted">Servidor: <span>${parent.text}</span></small>
+												<br />
+												<small class="text-muted">Cantidad de proyectos: <span id="count${parent.text}">1</span></small>
+											</div>`;
+
+					$('#resume').append(resumeDescription);
+				}
+
 				projectsSelected.push({
 					nameParent: parent.text,
 					projectName: node.text,
 				});
 			}
-
-			$('#result').prepend('<p>' + node.text + ' was checked</p>');
 		},
 		onNodeUnchecked: function(event, node) {
-			$('#result').prepend('<p>' + node.text + ' was unchecked</p>');
+			if (isNullOrUndefined(node.nodes)) {
+				projectsSelected = projectsSelected.filter(x => x.projectName != node.text);
+
+				const parent = $('#treeview-checkable').treeview('getParent', node);
+				let counter = projectsSelected.filter(x => x.nameParent == parent.text).length;
+				console.log(counter);
+				if (counter == 0) {
+					$(`#resume #${parent.text}`).remove();
+				} else {
+					$(`#resume #count${parent.text}`).html(counter);
+				}
+			}
 		},
 	});
 });
@@ -276,3 +293,12 @@ linkFolders.forEach(element => {
 		shell.openItem(e.target.dataset.path);
 	});
 });
+
+// const User = {
+// 	name: 'Eren Jeger',
+// 	friends: new Set(['Mikasa', 'Armin', 'Levi']),
+// };
+
+// const userString = JSON.stringify(User);
+
+// console.log(userString);
